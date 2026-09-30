@@ -6,4 +6,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include=".github\copilot-instructions.md" />
+    <None Include=".github\instructions\api-instructions.md" />
+    <None Include=".github\skills\net-audit\SKILL.md" />
+    <None Include=".github\skills\refactor-to-service\SKILL.md" />
+  </ItemGroup>
+
 </Project>
