@@ -1,0 +1,40 @@
+# Text Analyzer API Tests
+# Run these requests in Visual Studio or with the REST Client extension
+
+### Analyze text endpoint
+POST http://localhost:5028/tfc-analyze
+Content-Type: application/json
+
+{
+  "text": "Hello world this is a test"
+}
+
+###
+
+### Sentiment analysis endpoint
+POST http://localhost:5028/tfc-sentiment
+Content-Type: application/json
+
+{
+  "text": "This is a wonderful day"
+}
+
+###
+
+### Test with empty text (should return error)
+POST http://localhost:5028/tfc-analyze
+Content-Type: application/json
+
+{
+  "text": ""
+}
+
+###
+
+### Test with null text (should return error)
+POST http://localhost:5028/tfc-analyze
+Content-Type: application/json
+
+{
+  "text": null
+}

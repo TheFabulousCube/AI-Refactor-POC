@@ -70,3 +70,5 @@ record AnalyzeResponse(int WordCount, int CharacterCount);
 record SentimentRequest(string? Text);
 
 record SentimentResponse(string Score);
+
+public partial class Program { }

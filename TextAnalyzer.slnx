@@ -1,3 +1,6 @@
 <Solution>
+  <Folder Name="/tests/">
+    <Project Path="tests/TextAnalyzer.Api.Tests/TextAnalyzer.Api.Tests.csproj" />
+  </Folder>
   <Project Path="TextAnalyzer.csproj" />
 </Solution>

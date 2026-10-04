@@ -31,16 +31,19 @@ Skills are targetable behavior routines that can be explicitly invoked in the ch
 ---
 
 ## Tooling & Workflow Log
+### Experiment 003: Creating Test Project using custom Prompt/SKILL/templates with Kimi K3  
+Goals: 
+1. I wanted a solid test suite to make sure things didn't break in the future
+2. I wanted to try out templates for the files generated in a SKILL
+I had AI generate the skill and the templates.  It didn't work out _exactly_ as I wanted, but I wanted to move fast and figured I'd redo this step a few times.  
 
-### Experiment 1: Claude Code (Paid/Cloud)
-* **Prompt Provided:**
-  ```text
-  Create a new ASP.NET Core Minimal API project in this folder. Add one endpoint, a POST to /analyze, that accepts a JSON body with a "text" field, and returns the word count and character count of that text as JSON.
-  ```
-* **Result:** Perfect execution. Generated a clean, working minimal API.
-* **The Catch:** Cost \$0.13 for a single generation. Scalability for rapid, trial-and-error prototyping is too expensive for this specific POC. Switched to local execution.
+I started with my local `Qwen3-coder` model, but it took forever and I eventually stopped it.
 
-### Experiment 2: Ollama + BYOM (Free/Local)
+Kimi really did a great job, but I realized my initial folder structure was naive.
+> I'm documenting this step, but starting over for the next step
+
+
+### Experiment 002: Ollama + BYOM (Free/Local)
 Using qwen3-coder:30b, I created a targeted skill file to test adherence to strict standards:
 
 * **File Created:** .github/skills/audit/net-audit.md
@@ -67,6 +70,14 @@ Running the audit against the initial Program.cs file yielded perfect compliance
   /net-audit Create a new HTTP POST endpoint called "/sentiment" that accepts a text payload. It must evaluate the string and return a basic sentiment score (Positive, Negative, Neutral). Ensure the code strictly adheres to all our .github workspace rules.
   ```
 * **Result:** Success. It generated a brand new /tfc-sentiment endpoint that natively adopted the tfc- prefix rule from the skill architecture and correctly guessed a basic scoring payload structure.
+
+### Experiment 001: Claude Code (Paid/Cloud)
+* **Prompt Provided:**
+  ```text
+  Create a new ASP.NET Core Minimal API project in this folder. Add one endpoint, a POST to /analyze, that accepts a JSON body with a "text" field, and returns the word count and character count of that text as JSON.
+  ```
+* **Result:** Perfect execution. Generated a clean, working minimal API.
+* **The Catch:** Cost \$0.13 for a single generation. Scalability for rapid, trial-and-error prototyping is too expensive for this specific POC. Switched to local execution.
 
 ---
 
