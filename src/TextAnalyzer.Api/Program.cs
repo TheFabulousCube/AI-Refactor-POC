@@ -25,18 +25,14 @@ app.MapPost("/tfc-analyze", (AnalyzeRequest request) =>
         WordCount = wordCount,
         CharacterCount = characterCount
     });
-})
-.WithName("AnalyzeText")
-.WithOpenApi(operation =>
-{
-    operation.Summary = "Analyze text and return word count and character count";
-    operation.Description = "Accepts a JSON body with a 'text' field and returns the word count and character count of that text.";
-    return operation;
 });
 
 // Sentiment analysis endpoint
 app.MapPost("/tfc-sentiment", (AnalyzeSentimentRequest request) =>
 {
+    if (request == null || string.IsNullOrEmpty(request.Text)) {
+          return Results.BadRequest(new { Error = "Request body is required" });
+      }
     var positiveWords = new[] { "good", "great", "excellent", "amazing", "awesome" };
     var negativeWords = new[] { "bad", "poor", "terrible", "awful", "horrible" };
 
@@ -52,13 +48,6 @@ app.MapPost("/tfc-sentiment", (AnalyzeSentimentRequest request) =>
     {
         Sentiment = positiveCount > negativeCount ? "Positive" : (negativeCount > positiveCount ? "Negative" : "Neutral")
     });
-})
-.WithName("AnalyzeSentiment")
-.WithOpenApi(operation =>
-{
-    operation.Summary = "Analyze text sentiment and return positive/negative/neutral score";
-    operation.Description = "Accepts a JSON body with a 'text' field and returns the sentiment score of that text.";
-    return operation;
 });
 
 app.Run();

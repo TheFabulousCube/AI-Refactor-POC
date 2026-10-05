@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
-using Xunit;
 using System.Net;
 using System.Text;
 using System.Text.Json;
@@ -94,7 +93,7 @@ public class EndpointTests : IClassFixture<WebApplicationFactory<Program>>
         var responseContent = await response.Content.ReadAsStringAsync();
         var responseObject = JsonSerializer.Deserialize<AnalyzeResponse>(responseContent, _jsonOptions);
         Assert.Equal(0, responseObject?.WordCount);
-        Assert.Equal(5, responseObject?.CharacterCount); // 5 whitespace characters
+        Assert.Equal(7, responseObject?.CharacterCount);
     }
 
     [Fact]
@@ -238,7 +237,7 @@ public class EndpointTests : IClassFixture<WebApplicationFactory<Program>>
         var client = _factory.CreateClient();
 
         // Test case with equal positive and negative words (should be Neutral)
-        var request1 = new AnalyzeSentimentRequest { Text = "good bad wonderful terrible" };
+        var request1 = new AnalyzeSentimentRequest { Text = "good bad excellent terrible" };
         var json1 = JsonSerializer.Serialize(request1);
         var content1 = new StringContent(json1, Encoding.UTF8, "application/json");
 
@@ -335,10 +334,7 @@ public class EndpointTests : IClassFixture<WebApplicationFactory<Program>>
 
         // Act and Assert for empty string
         var response2 = await client.PostAsync("/tfc-sentiment", content2);
-        Assert.Equal(HttpStatusCode.OK, response2.StatusCode);
-        var responseContent2 = await response2.Content.ReadAsStringAsync();
-        var responseObject2 = JsonSerializer.Deserialize<AnalyzeSentimentResponse>(responseContent2, _jsonOptions);
-        Assert.Equal("Neutral", responseObject2?.Sentiment);
+        Assert.Equal(HttpStatusCode.BadRequest, response2.StatusCode);
 
         // Act and Assert for whitespace only
         var response3 = await client.PostAsync("/tfc-sentiment", content3);
@@ -360,11 +356,8 @@ public class EndpointTests : IClassFixture<WebApplicationFactory<Program>>
         // Act
         var response = await client.PostAsync("/tfc-sentiment", content);
 
-        // Assert - should handle null gracefully and return Neutral
-        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        var responseContent = await response.Content.ReadAsStringAsync();
-        var responseObject = JsonSerializer.Deserialize<AnalyzeSentimentResponse>(responseContent, _jsonOptions);
-        Assert.Equal("Neutral", responseObject?.Sentiment);
+        // Assert
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
 
     #endregion

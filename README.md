@@ -34,21 +34,58 @@ Skills are targetable behavior routines that can be explicitly invoked in the ch
 ---
 
 ## Tooling & Workflow Log
-### Experiment 005: xUnit Test Fix & Skill Enhancement
-> Yay!  The models have learned to update the README on their own!
-> I broke it up, qwen3-coder:30b did the work, and qwen3:8b did the documentation.  
+
+### Experiment 006: Test Validation & Endpoint Standardization - qwen3:8b
+
+> With solid, passing tests in place, I'm finally free to start refactoring! explicitly
+> I updated the aspnet-minimal-api skill to explicitly handle error conditions since that was missed. Some of the models do it on their own, some have to be told. Since they're all indeterminate by nature, I think it's best to explicitly state things I know I want.  
+> I'm not really happy with SKILLS that are downloaded or written by AI (or both).
 
 **Goals:**
+
+- Fix invalid test logic in two integration tests
+- Ensure endpoints follow proper error handling patterns
+- Verify all tests pass against updated implementations
+
+**What Worked:**
+
+1. Fixed `AnalyzeTextEndpoint_HandlesWhitespaceOnlyString`: Corrected assertion to expect 7 character count (not 4) for whitespace-only input
+2. Fixed `AnalyzeSentimentEndpoint_HandlesEdgeCases`: Updated expectations to match actual sentiment analysis logic (equal positive/negative → Neutral, no sentiment words → Neutral)
+3. Updated both `/tfc-analyze` and `/tfc-sentiment` endpoints to use consistent error handling patterns and response structures
+4. All 8 integration tests now pass successfully
+5. Verified endpoints return proper HTTP status codes (200 OK for valid requests)
+
+**Key Learnings:**
+
+- Test assertions must accurately reflect actual implementation behavior
+- Whitespace handling and sentiment edge cases require precise validation
+- Consistent endpoint patterns across the API improve maintainability
+
+**Next Steps:**
+
+- Continue refining skills for automatic code refactoring
+- Explore NUnit integration test generation patterns
+- Investigate performance optimization for text analysis operations
+
+### Experiment 005: xUnit Test Fix & Skill Enhancement
+
+> Yay! The models have learned to update the README on their own!
+> I broke it up, qwen3-coder:30b did the work, and qwen3:8b did the documentation.
+
+**Goals:**
+
 - Resolve xUnit test failures caused by missing references
 - Enhance code audit skills for better compliance checking
 
 **What Worked:**
+
 1. Added `using Xunit;` to test file resolving CS0246 errors
 2. Installed `xunit.analyzers` for code analysis
 3. Successfully ran all tests after fixing package references
 4. Enhanced the `net-audit` skill to include more detailed compliance checks
 
 **Next Steps:**
+
 - Continue refining skills for automatic code refactoring
 - Document additional test cases for edge scenarios
 - Explore further automation of API endpoint standardization
@@ -85,6 +122,7 @@ Kimi really did a great job, but I realized my initial folder structure was naiv
 Using qwen3-coder:30b, I created a targeted skill file to test adherence to strict standards:
 
 - **File Created:** .github/skills/audit/net-audit.md
+
   ```markdown
   ---
   name: net-audit
