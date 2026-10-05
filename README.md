@@ -34,6 +34,24 @@ Skills are targetable behavior routines that can be explicitly invoked in the ch
 ---
 
 ## Tooling & Workflow Log
+### Experiment 005: xUnit Test Fix & Skill Enhancement
+> Yay!  The models have learned to update the README on their own!
+> I broke it up, qwen3-coder:30b did the work, and qwen3:8b did the documentation.  
+
+**Goals:**
+- Resolve xUnit test failures caused by missing references
+- Enhance code audit skills for better compliance checking
+
+**What Worked:**
+1. Added `using Xunit;` to test file resolving CS0246 errors
+2. Installed `xunit.analyzers` for code analysis
+3. Successfully ran all tests after fixing package references
+4. Enhanced the `net-audit` skill to include more detailed compliance checks
+
+**Next Steps:**
+- Continue refining skills for automatic code refactoring
+- Document additional test cases for edge scenarios
+- Explore further automation of API endpoint standardization
 
 ### Experiment 004: Starting over
 
