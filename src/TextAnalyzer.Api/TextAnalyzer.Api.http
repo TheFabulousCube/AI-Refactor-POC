@@ -1,0 +1,8 @@
+@TextAnalyzer.Api_HostAddress = http://localhost:5128
+
+POST {{TextAnalyzer.Api_HostAddress}}/analyze
+Content-Type: application/json
+{
+  "Text": "This is a test of 10 words and 42 charcter"
+}
+###
