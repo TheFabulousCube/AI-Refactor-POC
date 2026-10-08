@@ -1,0 +1,31 @@
+using TextAnalyzer.Api.Models;
+
+namespace TextAnalyzer.Api.Services;
+
+public class SentimentAnalysisService : ISentimentAnalysisService
+{
+    public AnalyzeSentimentResponse AnalyzeSentiment(string? text)
+    {
+        if (string.IsNullOrEmpty(text))
+        {
+            return new AnalyzeSentimentResponse
+            {
+                Sentiment = "Neutral"
+            };
+        }
+
+        var positiveWords = new[] { "good", "great", "excellent", "amazing", "awesome" };
+        var negativeWords = new[] { "bad", "poor", "terrible", "awful", "horrible" };
+
+        var positiveCount = text.Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
+            .Count(word => positiveWords.Contains(word.ToLower()));
+
+        var negativeCount = text.Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
+            .Count(word => negativeWords.Contains(word.ToLower()));
+
+        return new AnalyzeSentimentResponse
+        {
+            Sentiment = positiveCount > negativeCount ? "Positive" : (negativeCount > positiveCount ? "Negative" : "Neutral")
+        };
+    }
+}

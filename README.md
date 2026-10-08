@@ -35,6 +35,28 @@ Skills are targetable behavior routines that can be explicitly invoked in the ch
 
 ## Tooling & Workflow Log
 
+### Experiment 008: Refactor TextAnalyzer.Api to use Services - gemma4:26b
+> I think I've found a sweet spot with gemma4:26b!  Large enough to do work, but not so slow!  
+> The model created a plan.md, so I figured I'd include it in a 'docs' folder  
+> It skipped the 'update-readme' skill the first time, I rolled that back and had it do it over
+**Goals:**
+
+- Refactor the business logic in `Program.cs` into separate services and use Dependency Injection.
+
+**What Worked:**
+
+1. Defined `ITextAnalysisService` and `SentimentAnalysisService` interfaces.
+2. Created `TextAnalysisService` and `SentimentAnalysisService` implementations in `src/TextAnalyzer.Api/Services/`.
+3. Created `ServiceExtensions.cs` and implemented `AddTextAnalyzerServices`.
+4. Registered services in `Program.cs`.
+5. Updated `Program.cs` endpoints to use the new services.
+6. Verified everything by running build and tests.
+
+**Key Learnings:**
+
+- Moving business logic to services and using DI improves testability and maintainability.
+- Ensuring all interfaces and implementations are correctly registered in the DI container is crucial.
+
 ### Experiment 007 - 2026-10-07 - TFC-Copilot
 > qwen3:8b got lost in the folder structure, I had to cancel that and start over.  
 > qwen3-coder handled it just fine, but it spills over from my GPU to the CPU and is very slow.  

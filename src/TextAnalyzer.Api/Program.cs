@@ -1,10 +1,13 @@
 using TextAnalyzer.Api.Models;
+using TextAnalyzer.Api.Services;
+using TextAnalyzer.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddTextAnalyzerServices();
 
 var app = builder.Build();
 
@@ -17,39 +20,19 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 // Analyze text endpoint
-app.MapPost("/tfc-analyze", (AnalyzeRequest request) =>
+app.MapPost("/tfc-analyze", (AnalyzeRequest request, ITextAnalysisService textAnalysisService) =>
 {
-    var wordCount = string.IsNullOrEmpty(request.Text) ? 0 : request.Text.Split(new char[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries).Length;
-    var characterCount = request.Text?.Length ?? 0;
-
-    return Results.Ok(new AnalyzeResponse
-    {
-        WordCount = wordCount,
-        CharacterCount = characterCount
-    });
+    return Results.Ok(textAnalysisService.AnalyzeText(request.Text));
 });
 
 // Sentiment analysis endpoint
-app.MapPost("/tfc-sentiment", (AnalyzeSentimentRequest request) =>
+app.MapPost("/tfc-sentiment", (AnalyzeSentimentRequest request, ISentimentAnalysisService sentimentAnalysisService) =>
 {
     if (request == null || string.IsNullOrEmpty(request.Text)) {
           return Results.BadRequest(new { Error = "Request body is required" });
       }
-    var positiveWords = new[] { "good", "great", "excellent", "amazing", "awesome" };
-    var negativeWords = new[] { "bad", "poor", "terrible", "awful", "horrible" };
 
-    var positiveCount = request.Text.Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
-        .Where(word => positiveWords.Contains(word.ToLower())).Count();
-
-    var negativeCount = request.Text.Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
-        .Where(word => negativeWords.Contains(word.ToLower())).Count();
-
-    var neutral = !positiveWords.Any(word => request.Text.Contains(word)) && !negativeWords.Any(word => request.Text.Contains(word));
-
-    return Results.Ok(new AnalyzeSentimentResponse
-    {
-        Sentiment = positiveCount > negativeCount ? "Positive" : (negativeCount > positiveCount ? "Negative" : "Neutral")
-    });
+    return Results.Ok(sentimentAnalysisService.AnalyzeSentiment(request.Text));
 });
 
 app.Run();
