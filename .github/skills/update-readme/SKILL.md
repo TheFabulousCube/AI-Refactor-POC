@@ -6,6 +6,7 @@ description: Update the README.md with a new entry in the Tooling & Workflow Log
 Document each agent-made repository change in the `README.md` workflow log.
 
 ## Target Section
+"N:\C# Playground\the-true-code\Copilot Test\README.md"
 
 Update:
 
@@ -19,9 +20,18 @@ Insert each new entry directly below this heading, above prior entries.
 
 Use the following template for each new entry:
 
-.skills/update-readme/templates/readme-log-entry.md
+`.github/skills/update-readme/templates/readme-log-entry.md`
 
-Copy the template, replace the placeholders, and insert the completed entry directly below:
+The template uses the following placeholders:
+
+- `{{EXPERIMENT_NUMBER}}` - Three-digit experiment number (e.g., 007)
+- `{{DESCRIPTIVE_TITLE}}` - Brief description of what was accomplished
+- `{{MODEL_NAME}}` - Name of the AI model used (e.g., qwen3:8b, qwen3-coder:30b)
+- `{{GOALS}}` - Bulleted list restating the user request and skills used
+- `{{WHAT_WORKED}}` - Numbered list of actions the agent performed
+- `{{KEY_LEARNINGS}}` - Problems encountered, things to watch out for, or insights gained
+
+Copy the template, replace all placeholders with actual content, and insert the completed entry directly below:
 
 ```md
 ## Tooling & Workflow Log

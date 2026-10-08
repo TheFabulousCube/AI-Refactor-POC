@@ -1,3 +1,5 @@
+using TextAnalyzer.Api.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -51,40 +53,3 @@ app.MapPost("/tfc-sentiment", (AnalyzeSentimentRequest request) =>
 });
 
 app.Run();
-
-public record AnalyzeRequest
-{
-    /// <summary>
-    /// Text to analyze
-    /// </summary>
-    public required string Text { get; set; }
-}
-
-public record AnalyzeResponse
-{
-    /// <summary>
-    /// Number of words in the text
-    /// </summary>
-    public int WordCount { get; set; }
-
-    /// <summary>
-    /// Number of characters in the text
-    /// </summary>
-    public int CharacterCount { get; set; }
-}
-
-public record AnalyzeSentimentRequest
-{
-    /// <summary>
-    /// Text to analyze for sentiment
-    /// </summary>
-    public required string Text { get; set; }
-}
-
-public record AnalyzeSentimentResponse
-{
-    /// <summary>
-    /// Sentiment score: Positive, Negative, or Neutral
-    /// </summary>
-    public string Sentiment { get; set; }
-}

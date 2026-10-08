@@ -2,6 +2,7 @@
 using System.Net;
 using System.Text;
 using System.Text.Json;
+using TextAnalyzer.Api.Models;
 using Xunit;
 
 namespace TextAnalyzer.Api.Tests;

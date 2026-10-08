@@ -35,6 +35,29 @@ Skills are targetable behavior routines that can be explicitly invoked in the ch
 
 ## Tooling & Workflow Log
 
+### Experiment 007 - 2026-10-07 - TFC-Copilot
+> qwen3:8b got lost in the folder structure, I had to cancel that and start over.  
+> qwen3-coder handled it just fine, but it spills over from my GPU to the CPU and is very slow.  
+> qwen3-coder also made a mess of this template, but that could be partly my fault.
+
+**Model:** qwen3-coder-next:latest
+
+**Goals:**
+- Refactor models from Program.cs into a separate Models/ folder
+- Maintain all existing functionality
+- Ensure tests continue to pass
+
+**What Worked:**
+- Created Models/ folder with 4 separate model files
+- Updated Program.cs to remove model definitions
+- All 15 tests pass after refactoring
+- Project builds successfully
+
+**Key Learnings:**
+- Ensured proper namespace usage
+- Maintained C# 12+ syntax with primary constructors
+- All tests passed without modification
+
 ### Experiment 006: Test Validation & Endpoint Standardization - qwen3:8b
 
 > With solid, passing tests in place, I'm finally free to start refactoring! explicitly

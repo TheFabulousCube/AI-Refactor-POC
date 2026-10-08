@@ -1,13 +1,13 @@
-### Experiment {{EXPERIMENT_NUMBER}}: {{DESCRIPTIVE_TITLE}} {{MODEL_NAME}}
+### Experiment {{EXPERIMENT_NUMBER}}: {{DESCRIPTIVE_TITLE}} - {{MODEL_NAME}}
 
-Goals:
+**Goals:**
 
-- {{GOALS}}
+{{GOALS}}
 
-What happened:
+**What Worked:**
 
-- {{WHAT_HAPPENED}}
+{{WHAT_WORKED}}
 
-References:
+**Key Learnings:**
 
-- {{REFERENCES}}
+{{KEY_LEARNINGS}}
