@@ -35,10 +35,35 @@ Skills are targetable behavior routines that can be explicitly invoked in the ch
 
 ## Tooling & Workflow Log
 
+### Experiment 009: Add Unit Tests for Services - gemma4:26b
+
+> Adding instructions to run a build and run the tests before and after code changes certaily cut down on my involvment,  
+> gemma forgot the using statements and miscounted some characters in the test, but figured it out without my help.  
+> I don't see any explicit SKILL calls in this round, but the work really was pretty simple.
+
+**Goals:**
+
+- Create unit tests for `TextAnalysisService` and `SentimentAnalysisService` to ensure business logic correctness.
+- Organize tests into a dedicated `Services` subfolder within the test project.
+
+**What Worked:**
+
+1. Created `tests/TextAnalyzer.Api.Tests/Services/` directory.
+2. Implemented `TextAnalysisServiceTests.cs` covering null, empty, and various text inputs.
+3. Implemented `SentimentAnalysisServiceTests.cs` covering sentiment variations.
+4. Verified all 29 tests pass successfully.
+
+**Key Learnings:**
+
+- Naive sentiment analysis (string splitting without punctuation handling) requires careful test data to avoid false positives/negatives.
+- Character count assertions must account for all whitespace characters (e.g., `\t`, `\n`, `\r`).
+
+
 ### Experiment 008: Refactor TextAnalyzer.Api to use Services - gemma4:26b
 > I think I've found a sweet spot with gemma4:26b!  Large enough to do work, but not so slow!  
 > The model created a plan.md, so I figured I'd include it in a 'docs' folder  
 > It skipped the 'update-readme' skill the first time, I rolled that back and had it do it over
+
 **Goals:**
 
 - Refactor the business logic in `Program.cs` into separate services and use Dependency Injection.
