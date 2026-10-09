@@ -35,7 +35,30 @@ Skills are targetable behavior routines that can be explicitly invoked in the ch
 
 ## Tooling & Workflow Log
 
+### Experiment 010: Instrumenting Observability for TextAnalyzer.Api - gemma4:26b
+
+> Added OpenTelemetry instrumentation to provide distributed tracing and metrics collection.
+
+**Goals:**
+
+- Add distributed tracing and metrics collection.
+- Export data via OTLP to `http://localhost:4317`.
+- Use `ServiceExtensions.cs` for clean separation of concerns.
+
+**What Worked:**
+
+1. Installed `OpenTelemetry.Extensions.Hosting`, `OpenTelemetry.Instrumentation.AspNetCore`, `OpenTelemetry.Instrumentation.Http`, and `OpenTelemetry.Exporter.OpenTelemetryProtocol` in `src/TextAnalyzer.Api`.
+2. Implemented `AddCustomTelemetry` in `src/TextAnalyzer.Api/ServiceExtensions.cs` with configured Resource Service Name, Tracing, Metrics, and OTLP exporter.
+3. Registered `AddCustomTelemetry` in `Program.cs`.
+4. Verified everything with a successful build and 36 passing tests.
+
+**Key Learnings:**
+
+- Centralizing telemetry configuration in `ServiceExtensions` maintains a clean `Program.cs`.
+- OpenTelemetry instrumentation for AspNetCore and Http is straightforward and provides immediate value for observability.
+
 ### Experiment 009: Add Unit Tests for Services - gemma4:26b
+
 
 > Adding instructions to run a build and run the tests before and after code changes certaily cut down on my involvment,  
 > gemma forgot the using statements and miscounted some characters in the test, but figured it out without my help.  
