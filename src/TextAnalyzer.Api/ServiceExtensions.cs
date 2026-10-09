@@ -8,6 +8,8 @@ namespace TextAnalyzer.Api;
 
 public static class ServiceExtensions
 {
+    public const string ServiceSourceName = "Custom.Application.Services";
+
     public static IServiceCollection AddTextAnalyzerServices(this IServiceCollection services)
     {
         services.AddScoped<ITextAnalysisService, TextAnalysisService>();
@@ -23,8 +25,9 @@ public static class ServiceExtensions
             .WithTracing(tracing =>
             {
                 tracing.AddAspNetCoreInstrumentation()
-                       .AddHttpClientInstrumentation()
-                       .AddOtlpExporter(options => options.Endpoint = new Uri("http://localhost:4317"));
+                           .AddHttpClientInstrumentation()
+                           .AddSource(ServiceSourceName)
+                           .AddOtlpExporter(options => options.Endpoint = new Uri("http://localhost:4317"));
             })
             .WithMetrics(metrics =>
             {

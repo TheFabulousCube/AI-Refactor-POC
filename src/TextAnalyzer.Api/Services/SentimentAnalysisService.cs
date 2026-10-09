@@ -1,11 +1,17 @@
+using System.Diagnostics;
 using TextAnalyzer.Api.Models;
 
 namespace TextAnalyzer.Api.Services;
 
 public class SentimentAnalysisService : ISentimentAnalysisService
 {
+    private static readonly ActivitySource _activitySource = new(TextAnalyzer.Api.ServiceExtensions.ServiceSourceName);
+
     public AnalyzeSentimentResponse AnalyzeSentiment(string? text)
     {
+        using var activity = _activitySource.StartActivity("AnalyzeSentimentExecution");
+        activity?.SetTag("custom.text.length", text?.Length ?? 0);
+
         if (string.IsNullOrEmpty(text))
         {
             return new AnalyzeSentimentResponse

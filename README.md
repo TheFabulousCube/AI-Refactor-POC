@@ -35,9 +35,33 @@ Skills are targetable behavior routines that can be explicitly invoked in the ch
 
 ## Tooling & Workflow Log
 
+### Experiment 011: Instrumenting core services with OpenTelemetry child spans - gemma4:26b
+> Well, this was easy, and the AI handled it well.  Now I have traces in the Splunk dashboard!  
+ The BYOM model does pick up the skill based on natural language well, but it's been crashing 
+around updating this README.md sometimes I have to start a new chat and get it to finish the work.  
+I wouldn't expect that from Enterprise models.
+
+**Goals:**
+
+- Instrument `TextAnalysisService` and `SentimentAnalysisService` with OpenTelemetry child spans.
+- Verify changes with build and tests.
+
+**What Worked:**
+
+1. Added `ActivitySource` to `TextAnalysisService` and `SentimentAnalysisService`.
+2. Wrapped service execution with OpenTelemetry child spans.
+3. Verified everything with a successful build and tests.
+
+**Key Learnings:**
+
+- Instrumenting core services with child spans provides granular observability into business logic execution.
+
 ### Experiment 010: Instrumenting Observability for TextAnalyzer.Api - gemma4:26b
 
-> Added OpenTelemetry instrumentation to provide distributed tracing and metrics collection.
+> I set up a local docker container running Splunk collector and dashboard as a seperate process.  
+> Since it's local, I had to turn off the TLS in Splunk.  Other than configuring Splunk, this went off great! 
+> Right now, it's emitting basic OTel, so Promethius/Graphana would be fine.  Hitting Cloud Splunk is much more complicated, but still boilerplate. 
+
 
 **Goals:**
 
