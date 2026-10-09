@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using TextAnalyzer.Api.Configuration;
 using TextAnalyzer.Api.Models;
 
 namespace TextAnalyzer.Api.Services;

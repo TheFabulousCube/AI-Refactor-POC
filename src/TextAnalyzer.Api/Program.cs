@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddTextAnalyzerServices();
+builder.Services.AddChatClient();
 builder.Services.AddCustomTelemetry();
 
 var app = builder.Build();

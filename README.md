@@ -35,6 +35,34 @@ Skills are targetable behavior routines that can be explicitly invoked in the ch
 
 ## Tooling & Workflow Log
 
+### Experiment 015: Refactor Configuration and Cleanup Duplicate Methods - gemma4:26b
+
+> I've found it's best to go ahead and clean up little things before they become a big refactor  
+keeping up and fixing technical debt is very important when things move fast. 
+I didn't use any SKILLs for this one, it was lots of prompting.  A smarter model may or may not have made these mistakes in the first place,  
+but keeping on top of them makes the next work easier.   
+Naming things correctly is even more important than ever.
+
+
+**Goals:**
+
+- Rename `ApiConstants` class and file to `OTelConstants` in `src/TextAnalyzer.Api/Configuration/`.
+- Remove the duplicate commented-out `GetSentimentChatOptions` method from `src/TextAnalyzer.Api/ServiceExtensions.cs`.
+- Decorate the `SentimentResult` enum with `[JsonConverter(typeof(JsonStringEnumConverter))]` in `src/TextAnalyzer.Api/Configuration/SentimentConfiguration.cs`.
+
+**What Worked:**
+
+1. Renamed `ApiConstants.cs` to `OTelConstants.cs` and updated the class name.
+2. Removed the duplicate commented-out method from `ServiceExtensions.cs` using a PowerShell script to avoid whitespace mismatches.
+3. Added `[JsonConverter(typeof(JsonStringEnumConverter))]` to `SentimentResult` and added the required `using System.Text.Json.Serialization;`.
+4. Verified the changes with a successful build.
+
+**Key Learnings:**
+
+- Using PowerShell for bulk removal in files with heavy commenting can be more reliable than `replace_string_in_file` when exact whitespace matching is difficult.
+- Adding `JsonStringEnumConverter` ensures that enums are serialized as strings in JSON responses, which is crucial for API consumers.
+
+
 
 ### Experiment 014: Add local Ollama IChatClient infrastructure - llama3.2
 

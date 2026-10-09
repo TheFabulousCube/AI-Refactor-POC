@@ -1,11 +1,6 @@
-namespace TextAnalyzer.Api.Models;
+using TextAnalyzer.Api.Configuration;
 
-public enum SentimentResult
-{
-    Positive,
-    Negative,
-    Neutral
-}
+namespace TextAnalyzer.Api.Models;
 
 public record AnalyzeSentimentResponse
 {

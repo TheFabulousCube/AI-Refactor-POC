@@ -1,7 +1,9 @@
+using TextAnalyzer.Api.Configuration;
 using TextAnalyzer.Api.Models;
 using TextAnalyzer.Api.Services;
 using Xunit;
 
+namespace SentimentAnalyzer.Api.Tests.Services;
 
 public class SentimentAnalysisServiceTests
 {
