@@ -1,6 +1,6 @@
-# Copilot Instructions, Skills, and Agents POC
+﻿# Copilot Instructions, Skills, and Agents POC
 
-> A continuous log and framework for forcing AI code generation tools to refactor legacy tutorial code under strict workspace constraints—without writing a single line of manual code.
+> A continuous log and framework for forcing AI code generation tools to refactor legacy tutorial code under strict workspace constraintsâ€”without writing a single line of manual code.
 
 ## The Core Philosophy & Constraint
 
@@ -34,6 +34,30 @@ Skills are targetable behavior routines that can be explicitly invoked in the ch
 ---
 
 ## Tooling & Workflow Log
+
+
+
+### Experiment 012: Split ITextAnalysisService.cs into multiple files - gemma4:26b
+> This should have been a very simple task, and the AI completed it quickly and easily.  
+But it had the worst time trying to update this README.  Looking through, I don't see anywhere that it's using the update-readme SKILL.
+
+**Goals:**
+
+- Split ISentimentAnalysisService from ITextAnalysisService.cs into ISentimentAnalysisService.cs.
+- Maintain existing functionality and ensure build/tests pass.
+
+**What Worked:**
+
+1. Created src/TextAnalyzer.Api/Services/ISentimentAnalysisService.cs.
+2. Cleaned up src/TextAnalyzer.Api/Services/ITextAnalysisService.cs.
+3. Verified the refactoring with a successful build and 36 passing tests.
+
+**Key Learnings:**
+
+- One interface per file improves discoverability and follows standard C# conventions.
+- Splitting interfaces prevents a single file from becoming a dumping ground for unrelated service definitions.
+
+---
 
 ### Experiment 011: Instrumenting core services with OpenTelemetry child spans - gemma4:26b
 > Well, this was easy, and the AI handled it well.  Now I have traces in the Splunk dashboard!  
@@ -167,7 +191,7 @@ I wouldn't expect that from Enterprise models.
 **What Worked:**
 
 1. Fixed `AnalyzeTextEndpoint_HandlesWhitespaceOnlyString`: Corrected assertion to expect 7 character count (not 4) for whitespace-only input
-2. Fixed `AnalyzeSentimentEndpoint_HandlesEdgeCases`: Updated expectations to match actual sentiment analysis logic (equal positive/negative → Neutral, no sentiment words → Neutral)
+2. Fixed `AnalyzeSentimentEndpoint_HandlesEdgeCases`: Updated expectations to match actual sentiment analysis logic (equal positive/negative â†’ Neutral, no sentiment words â†’ Neutral)
 3. Updated both `/tfc-analyze` and `/tfc-sentiment` endpoints to use consistent error handling patterns and response structures
 4. All 8 integration tests now pass successfully
 5. Verified endpoints return proper HTTP status codes (200 OK for valid requests)
@@ -287,3 +311,4 @@ To completely clean up and modularize messy tutorial codebases, I am building ou
 - [ ] **net-model-migration:** Automatically extracts inline DTOs, records, and data models out of Program.cs or services and moves them into a dedicated Models folder.
 - [ ] **net-di-setup:** Abstracts dependency injection setup out of Program.cs and into a dedicated ServiceExtensions.cs class using IServiceCollection extension methods.
 - [ ] **net-service-layer:** Safely migrates business logic to separate class libraries or service directories without duplicating existing data structures or models.
+

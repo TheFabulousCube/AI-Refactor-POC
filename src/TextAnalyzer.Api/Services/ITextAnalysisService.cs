@@ -6,8 +6,3 @@ public interface ITextAnalysisService
 {
     AnalyzeResponse AnalyzeText(string? text);
 }
-
-public interface ISentimentAnalysisService
-{
-    AnalyzeSentimentResponse AnalyzeSentiment(string? text);
-}
