@@ -38,3 +38,33 @@ Open `ServiceExtensions.cs`. Inside your telemetry or service configuration laye
           .UseOpenTelemetry(sourceName: "Experimental.Microsoft.Extensions.AI")
           .Build());
   ```
+
+### Step 3: Implement Structured Sentiment ChatOptions Builder
+
+To enforce strict enum parsing constraints downstream at the local SLM token level, add a helper method or factory pattern in `ServiceExtensions.cs` that constructs structured `ChatOptions` using JSON Schema:
+
+```csharp
+public static ChatOptions GetSentimentChatOptions()
+{
+    var schema = System.Text.Json.JsonSerializer.Serialize(new
+    {
+        type = "object",
+        properties = new {
+            sentiment = new {
+                type = "string",
+                @enum = new[] { "Positive", "Neutral", "Negative" }
+            }
+        },
+        required = new[] { "sentiment" }
+    });
+
+    return new ChatOptions
+    {
+        ResponseFormat = ChatResponseFormat.Json,
+        AdditionalProperties = new Dictionary<string, object>
+        {
+            ["json_schema"] = schema
+        }
+    };
+}
+```

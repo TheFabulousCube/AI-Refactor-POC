@@ -36,6 +36,30 @@ Skills are targetable behavior routines that can be explicitly invoked in the ch
 ## Tooling & Workflow Log
 
 
+### Experiment 014: Add local Ollama IChatClient infrastructure - llama3.2
+
+**Goals:**
+
+- Install `OllamaSharp` and `Microsoft.Extensions.AI` in `src/TextAnalyzer.Api`.
+- Register a local Ollama-backed `IChatClient` in `ServiceExtensions` using the `llama3.2` model.
+- Wrap the chat client in `ChatClientBuilder` and `UseOpenTelemetry` without changing API endpoints.
+- Add a reusable `GetSentimentChatOptions()` helper with JSON schema constraints for sentiment values.
+- Verify the solution still builds and all tests pass.
+
+**What Worked:**
+
+1. Added the required NuGet references for `OllamaSharp` and `Microsoft.Extensions.AI`.
+2. Registered an `IChatClient` singleton in `src/TextAnalyzer.Api/ServiceExtensions.cs` using `new OllamaApiClient(new Uri("http://localhost:11434"), "llama3.2")`.
+3. Wrapped the client with `ChatClientBuilder` and `UseOpenTelemetry(sourceName: "Experimental.Microsoft.Extensions.AI")`.
+4. Added `GetSentimentChatOptions()` to generate a structured JSON schema with `Positive`, `Neutral`, and `Negative` values.
+5. Ran the build and test suite, and the solution remained green with 36 passing tests.
+
+**Key Learnings:**
+
+- Keeping AI infrastructure in `ServiceExtensions` preserves a clean `Program.cs` and makes later swaps easier.
+- `ChatOptions.AdditionalProperties` requires `AdditionalPropertiesDictionary`, not a plain `Dictionary<string, object>`.
+- Local Ollama integration is dependable when the model name and telemetry pipeline are registered in the app startup container.
+
 ### Experiment 013: Refactor AnalyzeSentimentResponse to use SentimentResult enum - gemma4:26b
 > This has bugged me since Experiment #2. It should make the AI classification better. 
 
@@ -329,4 +353,7 @@ To completely clean up and modularize messy tutorial codebases, I am building ou
 - [ ] **net-model-migration:** Automatically extracts inline DTOs, records, and data models out of Program.cs or services and moves them into a dedicated Models folder.
 - [ ] **net-di-setup:** Abstracts dependency injection setup out of Program.cs and into a dedicated ServiceExtensions.cs class using IServiceCollection extension methods.
 - [ ] **net-service-layer:** Safely migrates business logic to separate class libraries or service directories without duplicating existing data structures or models.
+
+
+
 
