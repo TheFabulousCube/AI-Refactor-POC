@@ -16,7 +16,7 @@ public class SentimentAnalysisService : ISentimentAnalysisService
         {
             return new AnalyzeSentimentResponse
             {
-                Sentiment = "Neutral"
+                Sentiment = SentimentResult.Neutral
             };
         }
 
@@ -31,7 +31,7 @@ public class SentimentAnalysisService : ISentimentAnalysisService
 
         return new AnalyzeSentimentResponse
         {
-            Sentiment = positiveCount > negativeCount ? "Positive" : (negativeCount > positiveCount ? "Negative" : "Neutral")
+            Sentiment = positiveCount > negativeCount ? SentimentResult.Positive : (negativeCount > positiveCount ? SentimentResult.Negative : SentimentResult.Neutral)
         };
     }
 }

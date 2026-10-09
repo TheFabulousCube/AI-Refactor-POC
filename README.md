@@ -36,6 +36,24 @@ Skills are targetable behavior routines that can be explicitly invoked in the ch
 ## Tooling & Workflow Log
 
 
+### Experiment 013: Refactor AnalyzeSentimentResponse to use SentimentResult enum - gemma4:26b
+> This has bugged me since Experiment #2. It should make the AI classification better. 
+
+
+**Goals:**
+
+- Update `AnalyzeSentimentResponse` to use the `SentimentResult` enum for the `Sentiment` property.
+
+**What Worked:**
+
+1. Defined `SentimentResult` enum containing `Positive`, `Negative`, and `Neutral`.
+2. Updated `AnalyzeSentimentResponse` to use `SentimentResult` type for the `Sentiment` property.
+3. Verified that existing tests in `EndpointTests.cs` remain compatible.
+
+**Key Learnings:**
+
+- Using enums for predefined result sets increases type safety and prevents invalid values.
+
 
 ### Experiment 012: Split ITextAnalysisService.cs into multiple files - gemma4:26b
 > This should have been a very simple task, and the AI completed it quickly and easily.  

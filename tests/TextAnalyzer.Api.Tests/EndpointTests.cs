@@ -190,7 +190,7 @@ public class EndpointTests : IClassFixture<WebApplicationFactory<Program>>
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var responseContent = await response.Content.ReadAsStringAsync();
         var responseObject = JsonSerializer.Deserialize<AnalyzeSentimentResponse>(responseContent, _jsonOptions);
-        Assert.Equal("Positive", responseObject?.Sentiment);
+        Assert.Equal(SentimentResult.Positive, responseObject?.Sentiment);
     }
 
     [Fact]
@@ -209,7 +209,7 @@ public class EndpointTests : IClassFixture<WebApplicationFactory<Program>>
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var responseContent = await response.Content.ReadAsStringAsync();
         var responseObject = JsonSerializer.Deserialize<AnalyzeSentimentResponse>(responseContent, _jsonOptions);
-        Assert.Equal("Negative", responseObject?.Sentiment);
+        Assert.Equal(SentimentResult.Negative, responseObject?.Sentiment);
     }
 
     [Fact]
@@ -228,7 +228,7 @@ public class EndpointTests : IClassFixture<WebApplicationFactory<Program>>
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var responseContent = await response.Content.ReadAsStringAsync();
         var responseObject = JsonSerializer.Deserialize<AnalyzeSentimentResponse>(responseContent, _jsonOptions);
-        Assert.Equal("Neutral", responseObject?.Sentiment);
+        Assert.Equal(SentimentResult.Neutral, responseObject?.Sentiment);
     }
 
     [Fact]
@@ -262,28 +262,28 @@ public class EndpointTests : IClassFixture<WebApplicationFactory<Program>>
         Assert.Equal(HttpStatusCode.OK, response1.StatusCode);
         var responseContent1 = await response1.Content.ReadAsStringAsync();
         var responseObject1 = JsonSerializer.Deserialize<AnalyzeSentimentResponse>(responseContent1, _jsonOptions);
-        Assert.Equal("Neutral", responseObject1?.Sentiment);
+        Assert.Equal(SentimentResult.Neutral, responseObject1?.Sentiment);
 
         // Act and Assert for no sentiment words
         var response2 = await client.PostAsync("/tfc-sentiment", content2);
         Assert.Equal(HttpStatusCode.OK, response2.StatusCode);
         var responseContent2 = await response2.Content.ReadAsStringAsync();
         var responseObject2 = JsonSerializer.Deserialize<AnalyzeSentimentResponse>(responseContent2, _jsonOptions);
-        Assert.Equal("Neutral", responseObject2?.Sentiment);
+        Assert.Equal(SentimentResult.Neutral, responseObject2?.Sentiment);
 
         // Act and Assert for only positive words
         var response3 = await client.PostAsync("/tfc-sentiment", content3);
         Assert.Equal(HttpStatusCode.OK, response3.StatusCode);
         var responseContent3 = await response3.Content.ReadAsStringAsync();
         var responseObject3 = JsonSerializer.Deserialize<AnalyzeSentimentResponse>(responseContent3, _jsonOptions);
-        Assert.Equal("Positive", responseObject3?.Sentiment);
+        Assert.Equal(SentimentResult.Positive, responseObject3?.Sentiment);
 
         // Act and Assert for only negative words
         var response4 = await client.PostAsync("/tfc-sentiment", content4);
         Assert.Equal(HttpStatusCode.OK, response4.StatusCode);
         var responseContent4 = await response4.Content.ReadAsStringAsync();
         var responseObject4 = JsonSerializer.Deserialize<AnalyzeSentimentResponse>(responseContent4, _jsonOptions);
-        Assert.Equal("Negative", responseObject4?.Sentiment);
+        Assert.Equal(SentimentResult.Negative, responseObject4?.Sentiment);
     }
 
     [Fact]
@@ -302,7 +302,7 @@ public class EndpointTests : IClassFixture<WebApplicationFactory<Program>>
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var responseContent = await response.Content.ReadAsStringAsync();
         var responseObject = JsonSerializer.Deserialize<AnalyzeSentimentResponse>(responseContent, _jsonOptions);
-        Assert.Equal("Positive", responseObject?.Sentiment);
+        Assert.Equal(SentimentResult.Positive, responseObject?.Sentiment);
     }
 
     [Fact]
@@ -331,7 +331,7 @@ public class EndpointTests : IClassFixture<WebApplicationFactory<Program>>
         Assert.Equal(HttpStatusCode.OK, response1.StatusCode);
         var responseContent1 = await response1.Content.ReadAsStringAsync();
         var responseObject1 = JsonSerializer.Deserialize<AnalyzeSentimentResponse>(responseContent1, _jsonOptions);
-        Assert.Equal("Neutral", responseObject1?.Sentiment);
+        Assert.Equal(SentimentResult.Neutral, responseObject1?.Sentiment);
 
         // Act and Assert for empty string
         var response2 = await client.PostAsync("/tfc-sentiment", content2);
@@ -342,7 +342,7 @@ public class EndpointTests : IClassFixture<WebApplicationFactory<Program>>
         Assert.Equal(HttpStatusCode.OK, response3.StatusCode);
         var responseContent3 = await response3.Content.ReadAsStringAsync();
         var responseObject3 = JsonSerializer.Deserialize<AnalyzeSentimentResponse>(responseContent3, _jsonOptions);
-        Assert.Equal("Neutral", responseObject3?.Sentiment);
+        Assert.Equal(SentimentResult.Neutral, responseObject3?.Sentiment);
     }
 
     [Fact]

@@ -1,7 +1,7 @@
+using TextAnalyzer.Api.Models;
 using TextAnalyzer.Api.Services;
 using Xunit;
 
-namespace TextAnalyzer.Api.Tests.Services;
 
 public class SentimentAnalysisServiceTests
 {
@@ -16,7 +16,7 @@ public class SentimentAnalysisServiceTests
         var response = _service.AnalyzeSentiment(text);
 
         // Assert
-        Assert.Equal("Neutral", response.Sentiment);
+        Assert.Equal(SentimentResult.Neutral, response.Sentiment);
     }
 
     [Fact]
@@ -29,7 +29,7 @@ public class SentimentAnalysisServiceTests
         var response = _service.AnalyzeSentiment(text);
 
         // Assert
-        Assert.Equal("Positive", response.Sentiment);
+        Assert.Equal(SentimentResult.Positive, response.Sentiment);
     }
 
     [Fact]
@@ -42,7 +42,7 @@ public class SentimentAnalysisServiceTests
         var response = _service.AnalyzeSentiment(text);
 
         // Assert
-        Assert.Equal("Negative", response.Sentiment);
+        Assert.Equal(SentimentResult.Negative, response.Sentiment);
     }
 
     [Fact]
@@ -55,7 +55,7 @@ public class SentimentAnalysisServiceTests
         var response = _service.AnalyzeSentiment(text);
 
         // Assert
-        Assert.Equal("Neutral", response.Sentiment);
+        Assert.Equal(SentimentResult.Neutral, response.Sentiment);
     }
 
     [Fact]
@@ -68,7 +68,7 @@ public class SentimentAnalysisServiceTests
         var response = _service.AnalyzeSentiment(text);
 
         // Assert
-        Assert.Equal("Positive", response.Sentiment);
+        Assert.Equal(SentimentResult.Positive, response.Sentiment);
     }
 
     [Fact]
@@ -81,7 +81,7 @@ public class SentimentAnalysisServiceTests
         var response = _service.AnalyzeSentiment(text);
 
         // Assert
-        Assert.Equal("Negative", response.Sentiment);
+        Assert.Equal(SentimentResult.Negative, response.Sentiment);
     }
 
     [Fact]
@@ -94,7 +94,7 @@ public class SentimentAnalysisServiceTests
         var response = _service.AnalyzeSentiment(text);
 
         // Assert
-        Assert.Equal("Positive", response.Sentiment);
+        Assert.Equal(SentimentResult.Positive, response.Sentiment);
     }
 
     [Fact]
@@ -107,7 +107,7 @@ public class SentimentAnalysisServiceTests
         var response = _service.AnalyzeSentiment(text);
 
         // Assert
-        Assert.Equal("Neutral", response.Sentiment);
+        Assert.Equal(SentimentResult.Neutral, response.Sentiment);
     }
 
     [Fact]
@@ -120,7 +120,7 @@ public class SentimentAnalysisServiceTests
         var response = _service.AnalyzeSentiment(text);
 
         // Assert
-        Assert.Equal("Neutral", response.Sentiment);
+        Assert.Equal(SentimentResult.Neutral, response.Sentiment);
     }
 
     [Fact]
@@ -133,7 +133,7 @@ public class SentimentAnalysisServiceTests
         var response = _service.AnalyzeSentiment(text);
 
         // Assert
-        Assert.Equal("Neutral", response.Sentiment);
+        Assert.Equal(SentimentResult.Neutral, response.Sentiment);
     }
 
     [Fact]
@@ -146,6 +146,9 @@ public class SentimentAnalysisServiceTests
         var response = _service.AnalyzeSentiment(text);
 
         // Assert
-        Assert.Equal("Neutral", response.Sentiment);
+        Assert.Equal(SentimentResult.Neutral, response.Sentiment);
     }
 }
+
+
+

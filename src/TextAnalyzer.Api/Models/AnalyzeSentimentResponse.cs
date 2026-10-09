@@ -1,9 +1,16 @@
 namespace TextAnalyzer.Api.Models;
 
+public enum SentimentResult
+{
+    Positive,
+    Negative,
+    Neutral
+}
+
 public record AnalyzeSentimentResponse
 {
     /// <summary>
     /// Sentiment score: Positive, Negative, or Neutral
     /// </summary>
-    public string Sentiment { get; set; }
+    public SentimentResult Sentiment { get; set; }
 }
